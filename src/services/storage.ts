@@ -352,11 +352,11 @@ export const deleteHeldTransaction = (id: string) => {
 
 export const getAuthUser = (): Staff | null => {
   const data = localStorage.getItem(KEYS.AUTH_USER)
-  if (!data) return initialStaff[0] // Default to Owner Andi Wijaya
+  if (!data) return null
   try {
     return JSON.parse(data)
   } catch {
-    return initialStaff[0]
+    return null
   }
 }
 
@@ -378,5 +378,5 @@ export const resetAllDataToDefault = () => {
   localStorage.removeItem(KEYS.HELD_TRANSACTIONS)
   localStorage.removeItem(KEYS.CURRENT_SHIFT)
   localStorage.removeItem(KEYS.SHIFT_HISTORY)
-  localStorage.setItem(KEYS.AUTH_USER, JSON.stringify(initialStaff[0]))
+  localStorage.removeItem(KEYS.AUTH_USER)
 }

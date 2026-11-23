@@ -12,7 +12,6 @@ import {
   Scan,
   ShoppingCart,
   Trash2,
-  UserCheck,
   Users,
   X,
   XCircle,
@@ -25,7 +24,6 @@ import type { Product, Transaction } from '../../types/pos'
 import { HeldOrdersModal } from './HeldOrdersModal'
 import { PaymentModal } from './PaymentModal'
 import { ReceiptModal } from './ReceiptModal'
-import { ShiftModal } from './ShiftModal'
 import { SupervisorAuthModal } from './SupervisorAuthModal'
 
 export const PosView: React.FC = () => {
@@ -44,7 +42,6 @@ export const PosView: React.FC = () => {
     setOrderDiscount,
     taxRate,
     setTaxRate,
-    orderNumber,
     subtotal,
     itemCount,
     totalPieces,
@@ -63,7 +60,6 @@ export const PosView: React.FC = () => {
   const [showProductPicker, setShowProductPicker] = useState(false)
   const [showCustomerPicker, setShowCustomerPicker] = useState(false)
   const [showScannerSimulator, setShowScannerSimulator] = useState(false)
-  const [showShiftModal, setShowShiftModal] = useState(false)
   const [showSupervisorAuth, setShowSupervisorAuth] = useState<boolean>(false)
   const [showHeldModal, setShowHeldModal] = useState(false)
   const [showPaymentModal, setShowPaymentModal] = useState(false)
@@ -177,12 +173,6 @@ export const PosView: React.FC = () => {
     showToast('✅ Pembatalan / Void disetujui Supervisor!', 'success')
   }
 
-  // Time display
-  const currentTime = new Date().toLocaleTimeString('id-ID', {
-    hour: '2-digit',
-    minute: '2-digit',
-  }) + ' WIB'
-
   return (
     <div className="pb-36 pt-2 px-4 max-w-2xl mx-auto space-y-3.5 relative">
       {/* Toast Notification */}
@@ -261,25 +251,18 @@ export const PosView: React.FC = () => {
               onClick={() => setIsInputFocused(false)}
             />
             <div className="absolute left-0 right-0 top-12 z-40 bg-white rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden divide-y divide-slate-100 max-h-72 overflow-y-auto animate-in fade-in zoom-in-95 duration-100">
-              <div className="px-3.5 py-1.5 bg-slate-50 flex items-center justify-between text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
-                <span>Hasil Pencarian Kode / Nama ({liveSuggestions.length})</span>
-                <span>Tekan Enter untuk memilih</span>
-              </div>
-
               {liveSuggestions.length === 0 ? (
                 <div className="p-4 text-center text-xs text-slate-400">
                   <p>Tidak ditemukan produk dengan kode atau nama "{barcodeInput}".</p>
                 </div>
               ) : (
-                liveSuggestions.map((prod, idx) => (
+                liveSuggestions.map((prod) => (
                   <div
                     key={prod.id}
                     onClick={() => handleSelectProduct(prod)}
-                    className={`flex items-center justify-between p-2.5 hover:bg-emerald-50/70 cursor-pointer transition-colors ${
-                      idx === 0 ? 'bg-emerald-50/30' : ''
-                    }`}
+                    className="flex items-center justify-between p-2.5 hover:bg-emerald-50/70 cursor-pointer transition-colors"
                   >
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-100 overflow-hidden shrink-0 flex items-center justify-center">
                         {prod.image ? (
                           <img
@@ -294,32 +277,17 @@ export const PosView: React.FC = () => {
                           <ShoppingCart className="w-4 h-4 text-slate-400" />
                         )}
                       </div>
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <h5 className="font-bold text-xs text-slate-900 line-clamp-1">
-                            {prod.name}
-                          </h5>
-                          {idx === 0 && (
-                            <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 font-bold">
-                              Enter ↵
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
-                          <span className="font-mono text-emerald-700 font-semibold">
-                            {prod.code || 'BRG'}
-                          </span>
-                          <span>•</span>
-                          <span>{prod.sku}</span>
-                          <span>•</span>
-                          <span className={prod.stock <= 5 ? 'text-red-500 font-bold' : ''}>
-                            Stok: {prod.stock}
-                          </span>
-                        </div>
+                      <div className="min-w-0">
+                        <h5 className="font-bold text-xs text-slate-900 truncate">
+                          {prod.name}
+                        </h5>
+                        <p className="text-[11px] font-mono text-emerald-700 font-semibold mt-0.5">
+                          {prod.code || prod.sku}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex items-center gap-2 shrink-0 pl-2">
                       <span className="font-bold text-xs text-slate-900 font-mono">
                         {formatRupiah(prod.price)}
                       </span>
@@ -333,24 +301,6 @@ export const PosView: React.FC = () => {
             </div>
           </>
         )}
-      </div>
-
-      {/* Transaction Metadata Row (Matches Screen 4) */}
-      <div className="flex items-center justify-between text-xs">
-        <span className="font-semibold px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-900 border border-emerald-200/60 font-mono">
-          {orderNumber} • {currentTime}
-        </span>
-
-        {/* Kasir Badge with Shift Management trigger */}
-        <button
-          onClick={() => setShowShiftModal(true)}
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 font-medium border border-slate-200 transition-colors shadow-sm"
-          title="Klik untuk Kelola Shift Kasir & Laci Uang"
-        >
-          <UserCheck className="w-3.5 h-3.5 text-slate-500" />
-          <span>Kasir: {user?.name || 'Budi S.'}</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-        </button>
       </div>
 
       {/* Customer Selector Row (Matches Screen 4) */}
@@ -671,11 +621,6 @@ export const PosView: React.FC = () => {
           }}
           onSuccess={handleSupervisorApproved}
         />
-      )}
-
-      {/* Cashier Shift Reconciliation Modal */}
-      {showShiftModal && (
-        <ShiftModal onClose={() => setShowShiftModal(false)} />
       )}
 
       {/* Barcode Scanner Simulator Modal */}

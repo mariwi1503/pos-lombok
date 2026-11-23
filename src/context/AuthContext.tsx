@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { ModulePermission, Staff } from '../types/pos'
-import { initialPermissions, initialStaff } from '../data/dummyData'
+import { initialPermissions } from '../data/dummyData'
 import { getAuthUser, getStoredStaff, setAuthUser } from '../services/storage'
 
 interface AuthContextType {
@@ -19,8 +19,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<Staff | null>(null)
-  const [availableStaff, setAvailableStaff] = useState<Staff[]>(initialStaff)
+  const [user, setUser] = useState<Staff | null>(() => getAuthUser())
+  const [availableStaff, setAvailableStaff] = useState<Staff[]>(() => getStoredStaff())
 
   const refreshStaff = () => {
     const list = getStoredStaff()

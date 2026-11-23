@@ -192,50 +192,64 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
         </div>
       )}
 
-      {/* Switcher: Pelanggan vs Supplier vs Pembelian */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-          <button
-            onClick={() => setActiveSubTab('pelanggan')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-              activeSubTab === 'pelanggan'
-                ? 'bg-emerald-800 text-white shadow-sm'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
-            }`}
-          >
-            <Users className="w-3.5 h-3.5" />
-            <span>Pelanggan ({customers.length})</span>
-          </button>
+      {/* Subtab Switcher (Full Width on Smartphone, No Overlap) */}
+      <div className="flex bg-slate-200/80 p-1 rounded-2xl text-xs font-bold gap-1 shadow-inner">
+        <button
+          onClick={() => setActiveSubTab('pelanggan')}
+          className={`flex-1 py-2 px-1.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold ${
+            activeSubTab === 'pelanggan'
+              ? 'bg-white text-emerald-900 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          <Users className="w-3.5 h-3.5 shrink-0" />
+          <span className="truncate">Pelanggan ({customers.length})</span>
+        </button>
 
-          <button
-            onClick={() => setActiveSubTab('supplier')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-              activeSubTab === 'supplier'
-                ? 'bg-emerald-800 text-white shadow-sm'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
-            }`}
-          >
-            <Truck className="w-3.5 h-3.5" />
-            <span>Supplier ({suppliers.length})</span>
-          </button>
+        <button
+          onClick={() => setActiveSubTab('supplier')}
+          className={`flex-1 py-2 px-1.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold ${
+            activeSubTab === 'supplier'
+              ? 'bg-white text-emerald-900 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          <Truck className="w-3.5 h-3.5 shrink-0" />
+          <span className="truncate">Supplier ({suppliers.length})</span>
+        </button>
 
-          <button
-            onClick={() => setActiveSubTab('pembelian')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-              activeSubTab === 'pembelian'
-                ? 'bg-emerald-800 text-white shadow-sm'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
-            }`}
-          >
-            <Package className="w-3.5 h-3.5" />
-            <span>Pembelian / Kulakan ({purchases.length})</span>
-          </button>
+        <button
+          onClick={() => setActiveSubTab('pembelian')}
+          className={`flex-1 py-2 px-1.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold ${
+            activeSubTab === 'pembelian'
+              ? 'bg-white text-emerald-900 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          <Package className="w-3.5 h-3.5 shrink-0" />
+          <span className="truncate">Kulakan / PO ({purchases.length})</span>
+        </button>
+      </div>
+
+      {/* Subtab Header & Action Button */}
+      <div className="flex items-center justify-between pt-0.5">
+        <div>
+          <h3 className="font-serif font-bold text-base text-slate-900">
+            {activeSubTab === 'pelanggan' && 'Daftar Pelanggan Toko'}
+            {activeSubTab === 'supplier' && 'Daftar Supplier / Distributor'}
+            {activeSubTab === 'pembelian' && 'Riwayat Pembelian & Restok'}
+          </h3>
+          <p className="text-[11px] text-slate-400">
+            {activeSubTab === 'pelanggan' && `${customers.length} kontak pelanggan terdaftar`}
+            {activeSubTab === 'supplier' && `${suppliers.length} rekanan supplier aktif`}
+            {activeSubTab === 'pembelian' && `${purchases.length} faktur kulakan supplier`}
+          </p>
         </div>
 
         {activeSubTab === 'pembelian' ? (
           <button
             onClick={() => setShowAddPurchaseModal(true)}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 shadow-md shadow-emerald-800/15 shrink-0"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 shadow-md shadow-emerald-800/15 transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span>Catat PO</span>
@@ -243,7 +257,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
         ) : (
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 shadow-md shadow-emerald-800/15 shrink-0"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 shadow-md shadow-emerald-800/15 transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span>Tambah</span>

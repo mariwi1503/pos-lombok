@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Bell, ChevronDown, LogOut, Receipt, RefreshCw, User } from 'lucide-react'
+import { Bell, ChevronDown, Coins, LogOut, Receipt, RefreshCw, User } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { resetAllDataToDefault } from '../../services/storage'
+import { ShiftModal } from '../pos/ShiftModal'
 
 interface HeaderProps {
   onOpenNotifications?: () => void
@@ -12,6 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenNotifications, onOpenHisto
   const { user, logout, switchStaff, availableStaff } = useAuth()
   const [showProfileMenu, setShowProfileMenu] = useState(false)
   const [showNotificationModal, setShowNotificationModal] = useState(false)
+  const [showShiftModal, setShowShiftModal] = useState(false)
 
   const handleReset = () => {
     if (window.confirm('Reset seluruh data ke dummy default awal? (Data penjualan dan stok akan dikembalikan semula)')) {
@@ -117,6 +119,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenNotifications, onOpenHisto
                       <button
                         onClick={() => {
                           setShowProfileMenu(false)
+                          setShowShiftModal(true)
+                        }}
+                        className="w-full px-4 py-2 text-left text-xs text-emerald-800 hover:bg-emerald-50 flex items-center gap-2 transition-colors font-medium"
+                      >
+                        <Coins className="w-3.5 h-3.5 text-emerald-700" />
+                        <span>Kelola Shift & Laci Uang</span>
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setShowProfileMenu(false)
                           onOpenHistory?.()
                         }}
                         className="w-full px-4 py-2 text-left text-xs text-indigo-700 hover:bg-indigo-50 flex items-center gap-2 transition-colors font-medium"
@@ -182,6 +195,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenNotifications, onOpenHisto
             </div>
           </div>
         </div>
+      )}
+
+      {/* Cashier Shift Reconciliation Modal */}
+      {showShiftModal && (
+        <ShiftModal onClose={() => setShowShiftModal(false)} />
       )}
     </>
   )
