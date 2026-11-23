@@ -8,12 +8,14 @@ import {
   X,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { initialPermissions } from '../../data/dummyData'
 import { setStoredStaff } from '../../services/storage'
 import type { Staff, StaffRole } from '../../types/pos'
 
 export const StaffView: React.FC = () => {
   const { availableStaff, refreshStaff } = useAuth()
+  const { t } = useLanguage()
   const [filterRole, setFilterRole] = useState<string>('Semua')
   const [staffList, setStaffList] = useState<Staff[]>(availableStaff)
   const [showAddModal, setShowAddModal] = useState(false)
@@ -104,7 +106,7 @@ export const StaffView: React.FC = () => {
           className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 transition-all shadow-md shadow-emerald-800/15"
         >
           <UserPlus className="w-4 h-4" />
-          <span>Tambah Staff</span>
+          <span>+ {t('add')} {t('tabStaff')}</span>
         </button>
       </div>
 

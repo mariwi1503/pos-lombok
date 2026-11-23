@@ -379,4 +379,5 @@ export const resetAllDataToDefault = () => {
   localStorage.removeItem(KEYS.CURRENT_SHIFT)
   localStorage.removeItem(KEYS.SHIFT_HISTORY)
   localStorage.removeItem(KEYS.AUTH_USER)
+  localStorage.removeItem('pos_language')
 }

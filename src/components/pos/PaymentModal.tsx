@@ -11,6 +11,7 @@ import { formatRupiah, saveTransaction } from '../../services/storage'
 import type { Transaction } from '../../types/pos'
 import { useAuth } from '../../context/AuthContext'
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
 
 interface PaymentModalProps {
   onClose: () => void
@@ -19,6 +20,7 @@ interface PaymentModalProps {
 
 export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }) => {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const {
     items,
     customer,
@@ -37,12 +39,12 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
 
   // Quick denomination suggestions
   const denominations = [
-    { label: 'Uang Pas', value: total },
+    { label: t('payExactCash'), value: total },
     { label: 'Rp 20.000', value: 20000 },
     { label: 'Rp 50.000', value: 50000 },
     { label: 'Rp 100.000', value: 100000 },
     { label: 'Rp 200.000', value: 200000 },
-  ].filter((d) => d.value >= total || d.label === 'Uang Pas')
+  ].filter((d) => d.value >= total || d.label === t('payExactCash'))
 
   const change = Math.max(0, cashAmount - total)
   const isEnough = method === 'Tunai' ? cashAmount >= total : true
@@ -169,7 +171,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
             {/* Custom Amount Received Input */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Uang Diterima (Rp)
+                {t('payReceived')} (Rp)
               </label>
               <input
                 type="number"
@@ -184,7 +186,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
 
             {/* Change Calculation Box */}
             <div className="bg-slate-50 rounded-2xl p-3 border border-slate-200/80 flex items-center justify-between text-xs">
-              <span className="font-semibold text-slate-600">Kembalian:</span>
+              <span className="font-semibold text-slate-600">{t('payChange')}:</span>
               <span
                 className={`font-mono font-bold text-sm ${
                   change > 0
@@ -195,7 +197,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
                 }`}
               >
                 {cashAmount < total
-                  ? `Kurang ${formatRupiah(total - cashAmount)}`
+                  ? `${t('payShortage')} ${formatRupiah(total - cashAmount)}`
                   : formatRupiah(change)}
               </span>
             </div>
@@ -232,7 +234,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
             }`}
           >
             <Check className="w-5 h-5" />
-            <span>Selesaikan & Cetak Struk</span>
+            <span>{t('payProcessBtn')}</span>
           </button>
         </div>
       </div>

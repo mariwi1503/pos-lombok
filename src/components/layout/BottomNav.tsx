@@ -7,6 +7,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
 
 export type TabType = 'dashboard' | 'produk' | 'kasir' | 'mitra' | 'staff' | 'riwayat'
 
@@ -17,6 +18,7 @@ interface BottomNavProps {
 
 export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
   const { itemCount } = useCart()
+  const { t } = useLanguage()
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
@@ -31,7 +33,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) 
           }`}
         >
           <LayoutGrid className="w-5 h-5 mb-0.5" />
-          <span className="text-[11px]">Dashboard</span>
+          <span className="text-[11px]">{t('tabDashboard')}</span>
         </button>
 
         {/* Tab Produk */}
@@ -44,7 +46,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) 
           }`}
         >
           <Package className="w-5 h-5 mb-0.5" />
-          <span className="text-[11px]">Produk</span>
+          <span className="text-[11px]">{t('tabProducts')}</span>
         </button>
 
         {/* Floating Kasir / Cart Button in Center */}
@@ -75,7 +77,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) 
           }`}
         >
           <Users2 className="w-5 h-5 mb-0.5" />
-          <span className="text-[11px]">Mitra</span>
+          <span className="text-[11px]">{t('tabMitra')}</span>
         </button>
 
         {/* Tab Staff */}
@@ -88,7 +90,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) 
           }`}
         >
           <ShieldCheck className="w-5 h-5 mb-0.5" />
-          <span className="text-[11px]">Staff</span>
+          <span className="text-[11px]">{t('tabStaff')}</span>
         </button>
       </div>
     </div>

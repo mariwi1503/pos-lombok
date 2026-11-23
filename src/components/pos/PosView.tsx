@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { playErrorBuzz, playScannerBeep } from '../../services/sound'
 import { formatRupiah, getStoredCustomers, getStoredProducts } from '../../services/storage'
 import type { Product, Transaction } from '../../types/pos'
@@ -28,6 +29,7 @@ import { SupervisorAuthModal } from './SupervisorAuthModal'
 
 export const PosView: React.FC = () => {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const {
     items,
     customer,
@@ -206,7 +208,7 @@ export const PosView: React.FC = () => {
                 setBarcodeInput(e.target.value)
                 setIsInputFocused(true)
               }}
-              placeholder="Scan Barcode / Ketik Kode / Nama Produk..."
+              placeholder={t('posSearchPlaceholder')}
               className="w-full pl-9 pr-8 py-2.5 rounded-2xl bg-white border border-slate-200/90 text-xs focus:ring-2 focus:ring-emerald-700 focus:outline-none shadow-sm font-medium"
             />
             <Scan className="w-4 h-4 text-emerald-700 absolute left-3 top-3" />
@@ -228,7 +230,7 @@ export const PosView: React.FC = () => {
           <button
             onClick={() => setShowScannerSimulator(true)}
             className="w-10 h-10 rounded-2xl bg-emerald-800 text-white flex items-center justify-center hover:bg-emerald-900 active:scale-95 transition-all shadow-md shadow-emerald-800/15 shrink-0"
-            title="Scan Barcode Cepat"
+            title={t('posScannerTooltip')}
           >
             <QrCode className="w-5 h-5" />
           </button>
@@ -237,7 +239,7 @@ export const PosView: React.FC = () => {
           <button
             onClick={() => setShowProductPicker(true)}
             className="w-10 h-10 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center hover:bg-indigo-100 active:scale-95 transition-all shrink-0"
-            title="Tambah Produk dari Daftar"
+            title={t('posAddManualTooltip')}
           >
             <Plus className="w-5 h-5" />
           </button>
@@ -314,7 +316,7 @@ export const PosView: React.FC = () => {
               <span className="font-bold text-slate-900">{customer.name}</span>
               {customer.points > 0 && (
                 <span className="text-[10px] px-2 py-0.2 rounded-full bg-amber-100 text-amber-800 font-bold">
-                  ★ {customer.points} Poin
+                  ★ {customer.points} {t('posPointsLabel')}
                 </span>
               )}
             </div>
@@ -328,16 +330,16 @@ export const PosView: React.FC = () => {
           onClick={() => setShowCustomerPicker(true)}
           className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 px-2.5 py-1 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors flex items-center gap-1"
         >
-          <span>⇄ Ubah</span>
+          <span>⇄ {t('posChangeCustomer')}</span>
         </button>
       </div>
 
       {/* Daftar Belanja Header */}
       <div className="flex items-center justify-between pt-1">
         <div className="flex items-center gap-2">
-          <h3 className="font-serif font-bold text-base text-slate-900">Daftar Belanja</h3>
+          <h3 className="font-serif font-bold text-base text-slate-900">{t('posCartTitle')}</h3>
           <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-800 text-white">
-            {itemCount} Item
+            {itemCount} {t('posItemsCount')}
           </span>
         </div>
 
@@ -347,7 +349,7 @@ export const PosView: React.FC = () => {
             className="flex items-center gap-1 text-xs text-red-600 hover:text-red-800 font-semibold transition-colors"
           >
             <Trash2 className="w-3.5 h-3.5" />
-            <span>Kosongkan</span>
+            <span>{t('posEmptyCartBtn')}</span>
           </button>
         )}
       </div>
@@ -359,9 +361,9 @@ export const PosView: React.FC = () => {
             <ShoppingCart className="w-8 h-8" />
           </div>
           <div>
-            <p className="font-bold text-slate-800 text-sm">Keranjang Masih Kosong</p>
+            <p className="font-bold text-slate-800 text-sm">{t('posCartEmptyTitle')}</p>
             <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
-              Scan barcode barang atau ketik kode produk di kolom atas.
+              {t('posCartEmptySub')}
             </p>
           </div>
           <div className="flex items-center justify-center gap-2 pt-1">
@@ -372,13 +374,13 @@ export const PosView: React.FC = () => {
               }}
               className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold"
             >
-              Coba Ketik: 8821
+              {t('posTryType')} 8821
             </button>
             <button
               onClick={() => setShowProductPicker(true)}
               className="px-4 py-2 rounded-2xl bg-emerald-800 text-white text-xs font-bold hover:bg-emerald-900 active:scale-95 transition-all shadow-md shadow-emerald-800/15"
             >
-              + Pilih Produk
+              {t('posPickProductBtn')}
             </button>
           </div>
         </div>
@@ -594,7 +596,7 @@ export const PosView: React.FC = () => {
             }`}
           >
             <XCircle className="w-4 h-4" />
-            <span>Batal</span>
+            <span>{t('cancel')}</span>
           </button>
 
           {/* Bayar button */}
@@ -607,7 +609,7 @@ export const PosView: React.FC = () => {
                 : 'bg-slate-300 cursor-not-allowed shadow-none'
             }`}
           >
-            <span>Bayar {formatRupiah(total)}</span>
+            <span>{t('posPayBtn')} {formatRupiah(total)}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

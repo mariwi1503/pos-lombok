@@ -8,11 +8,14 @@ import {
   UserCheck,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { playErrorBuzz, playScannerBeep } from '../../services/sound'
 import type { Staff } from '../../types/pos'
+import { LanguageSwitcher } from '../common/LanguageSwitcher'
 
 export const LoginPage: React.FC = () => {
   const { availableStaff, login } = useAuth()
+  const { t } = useLanguage()
   const [selectedStaff, setSelectedStaff] = useState<Staff>(availableStaff[0])
   const [pin, setPin] = useState<string>('')
   const [errorMsg, setErrorMsg] = useState<string>('')
@@ -39,13 +42,13 @@ export const LoginPage: React.FC = () => {
   const handlePinLogin = (e?: React.FormEvent) => {
     if (e) e.preventDefault()
     if (!selectedStaff) {
-      setErrorMsg('Pilih akun staff terlebih dahulu.')
+      setErrorMsg(t('selectStaffFirstMsg'))
       return
     }
 
     if (selectedStaff.pin && selectedStaff.pin !== pin) {
       playErrorBuzz()
-      setErrorMsg('PIN salah! Gunakan PIN demo default: 1234')
+      setErrorMsg(t('pinWrongMsg'))
       return
     }
 
@@ -63,15 +66,18 @@ export const LoginPage: React.FC = () => {
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-200/80 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         {/* Brand Banner */}
         <div className="bg-emerald-800 text-white p-6 text-center relative overflow-hidden">
+          <div className="absolute top-4 right-4 z-10">
+            <LanguageSwitcher />
+          </div>
           <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-emerald-700/50 rounded-full blur-xl pointer-events-none" />
           <div className="w-14 h-14 bg-white/10 rounded-2xl mx-auto flex items-center justify-center mb-2.5 backdrop-blur-sm border border-white/20 shadow-inner">
             <Store className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold font-serif tracking-tight">Toko Berkah Jaya</h1>
-          <p className="text-emerald-100/90 text-xs mt-0.5">Sistem Kasir & Point of Sale (POS)</p>
+          <h1 className="text-2xl font-bold font-serif tracking-tight">{t('appName')}</h1>
+          <p className="text-emerald-100/90 text-xs mt-0.5">{t('appSubtitle')}</p>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-[11px] font-medium text-emerald-100 mt-2.5 backdrop-blur-sm">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>Mode Simulasi Demo (Client-Side & LocalStorage)</span>
+            <span>{t('demoMode')}</span>
           </div>
         </div>
 
@@ -85,7 +91,7 @@ export const LoginPage: React.FC = () => {
                   : 'text-slate-500 hover:text-slate-800'
                 }`}
             >
-              Masuk dengan PIN Kasir
+              {t('loginPinTab')}
             </button>
             <button
               onClick={() => setLoginMode('quick')}
@@ -94,7 +100,7 @@ export const LoginPage: React.FC = () => {
                   : 'text-slate-500 hover:text-slate-800'
                 }`}
             >
-              1-Klik Masuk Cepat
+              {t('loginQuickTab')}
             </button>
           </div>
         </div>
@@ -107,7 +113,7 @@ export const LoginPage: React.FC = () => {
               {/* Staff Selector Pills */}
               <div>
                 <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Silahkan pilih user:
+                  {t('selectStaffLabel')}
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   {availableStaff.slice(0, 4).map((staff) => {
@@ -143,7 +149,7 @@ export const LoginPage: React.FC = () => {
               {/* PIN Display & Feedback */}
               <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 text-center space-y-1.5">
                 <p className="text-[11px] text-slate-500 font-medium">
-                  Masukkan PIN untuk <span className="font-bold text-slate-800">{selectedStaff.name}</span> (Demo: 1234)
+                  {t('enterPinFor')} <span className="font-bold text-slate-800">{selectedStaff.name}</span> {t('demoPinHint')}
                 </p>
 
                 {/* PIN Dots Display */}
@@ -205,7 +211,7 @@ export const LoginPage: React.FC = () => {
                 onClick={() => handlePinLogin()}
                 className="w-full py-3 bg-emerald-800 hover:bg-emerald-900 active:scale-98 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-emerald-800/20 transition-all"
               >
-                <span>Masuk ke Kasir</span>
+                <span>{t('enterCashierBtn')}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -215,7 +221,7 @@ export const LoginPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                   <UserCheck className="w-3.5 h-3.5 text-emerald-700" />
-                  Pilih Akun Demo (1-Klik Masuk Langsung)
+                  {t('quickLoginTitle')}
                 </span>
               </div>
 
@@ -257,11 +263,11 @@ export const LoginPage: React.FC = () => {
           <div className="bg-slate-50 rounded-2xl p-3 border border-slate-200/60 text-[11px] text-slate-500 space-y-1">
             <div className="flex items-center gap-1.5 font-semibold text-slate-700">
               <Shield className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Informasi Hak Akses Role:</span>
+              <span>{t('roleInfoTitle')}</span>
             </div>
-            <p>• <strong>Owner:</strong> Akses penuh semua modul, laporan laba kotor & omzet.</p>
-            <p>• <strong>Supervisor:</strong> Mengelola produk, stok masuk supplier, dan staf toko.</p>
-            <p>• <strong>Kasir:</strong> Berfokus pada transaksi kasir POS & cetak struk.</p>
+            <p>• <strong>Owner:</strong> {t('roleInfoOwner')}</p>
+            <p>• <strong>Supervisor:</strong> {t('roleInfoSupervisor')}</p>
+            <p>• <strong>Kasir:</strong> {t('roleInfoCashier')}</p>
           </div>
         </div>
       </div>

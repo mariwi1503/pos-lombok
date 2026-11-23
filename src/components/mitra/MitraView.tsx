@@ -12,6 +12,7 @@ import {
   Users,
   X,
 } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 import {
   formatRupiah,
   getStoredCustomers,
@@ -29,6 +30,7 @@ interface MitraViewProps {
 }
 
 export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan' }) => {
+  const { t } = useLanguage()
   const [activeSubTab, setActiveSubTab] = useState<'pelanggan' | 'supplier' | 'pembelian'>(initialSubTab)
   const [customers, setCustomers] = useState<Customer[]>(getStoredCustomers())
   const [suppliers, setSuppliers] = useState<Supplier[]>(getStoredSuppliers())
@@ -203,7 +205,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
           }`}
         >
           <Users className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">Pelanggan ({customers.length})</span>
+          <span className="truncate">{t('mitraSubCustomer')} ({customers.length})</span>
         </button>
 
         <button
@@ -215,7 +217,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
           }`}
         >
           <Truck className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">Supplier ({suppliers.length})</span>
+          <span className="truncate">{t('mitraSubSupplier')} ({suppliers.length})</span>
         </button>
 
         <button
@@ -227,7 +229,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
           }`}
         >
           <Package className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">Kulakan / PO ({purchases.length})</span>
+          <span className="truncate">{t('mitraSubPurchase')} ({purchases.length})</span>
         </button>
       </div>
 
@@ -235,9 +237,9 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
       <div className="flex items-center justify-between pt-0.5">
         <div>
           <h3 className="font-serif font-bold text-base text-slate-900">
-            {activeSubTab === 'pelanggan' && 'Daftar Pelanggan Toko'}
-            {activeSubTab === 'supplier' && 'Daftar Supplier / Distributor'}
-            {activeSubTab === 'pembelian' && 'Riwayat Pembelian & Restok'}
+            {activeSubTab === 'pelanggan' && t('mitraCustomerTitle')}
+            {activeSubTab === 'supplier' && t('mitraSupplierTitle')}
+            {activeSubTab === 'pembelian' && t('mitraPurchaseTitle')}
           </h3>
           <p className="text-[11px] text-slate-400">
             {activeSubTab === 'pelanggan' && `${customers.length} kontak pelanggan terdaftar`}
@@ -252,7 +254,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 shadow-md shadow-emerald-800/15 transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
-            <span>Catat PO</span>
+            <span>{t('mitraRecordPOBtn')}</span>
           </button>
         ) : (
           <button
@@ -260,7 +262,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 shadow-md shadow-emerald-800/15 transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
-            <span>Tambah</span>
+            <span>{t('add')}</span>
           </button>
         )}
       </div>

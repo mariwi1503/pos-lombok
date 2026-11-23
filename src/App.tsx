@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
+import { LanguageProvider } from './context/LanguageContext'
 import { Header } from './components/layout/Header'
 import { BottomNav, type TabType } from './components/layout/BottomNav'
 import { LoginPage } from './components/auth/LoginPage'
@@ -66,11 +67,13 @@ const MainApp: React.FC = () => {
 
 export function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <MainApp />
-      </CartProvider>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <CartProvider>
+          <MainApp />
+        </CartProvider>
+      </AuthProvider>
+    </LanguageProvider>
   )
 }
 

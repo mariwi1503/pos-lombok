@@ -12,6 +12,7 @@ import {
   Wallet,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { initialWeeklyTrend } from '../../data/dummyData'
 import {
   formatRupiah,
@@ -27,6 +28,7 @@ interface DashboardViewProps {
 
 export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) => {
   const { hasPermission } = useAuth()
+  const { t } = useLanguage()
   const [period, setPeriod] = useState<'hari' | 'minggu' | 'bulan'>('hari')
   const [selectedBar, setSelectedBar] = useState<string>('Min')
 
@@ -84,7 +86,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
           <div>
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-semibold text-slate-500">
-                Omzet {period === 'hari' ? 'Hari Ini' : period === 'minggu' ? 'Minggu Ini' : 'Bulan Ini'}
+                {t('dashboardOmzet')}
               </span>
               <Banknote className="w-4 h-4 text-emerald-700" />
             </div>
@@ -111,7 +113,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
           ) : null}
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-slate-500">Laba Kotor</span>
+              <span className="text-xs font-semibold text-slate-500">{t('dashboardGrossProfit')}</span>
               <Wallet className="w-4 h-4 text-emerald-700" />
             </div>
             <h3 className="text-lg font-black text-slate-900 tracking-tight">
@@ -132,7 +134,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
         >
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-slate-500">Total Transaksi</span>
+              <span className="text-xs font-semibold text-slate-500">{t('dashboardTotalTransactions')}</span>
               <Receipt className="w-4 h-4 text-indigo-600" />
             </div>
             <h3 className="text-lg font-black text-slate-900 tracking-tight">
@@ -151,7 +153,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
         <div className="bg-white rounded-3xl p-4 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-slate-500">Rata-rata Order</span>
+              <span className="text-xs font-semibold text-slate-500">{t('dashboardAvgOrder')}</span>
               <ShoppingBag className="w-4 h-4 text-amber-700" />
             </div>
             <h3 className="text-lg font-black text-slate-900 tracking-tight">
@@ -166,7 +168,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
       <div className="bg-white rounded-3xl p-5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-serif font-bold text-base text-slate-900">Tren Penjualan 7 Hari</h3>
+            <h3 className="font-serif font-bold text-base text-slate-900">{t('salesTrend7Days')}</h3>
             <p className="text-xs text-slate-400">Ketuk batang untuk detail harian</p>
           </div>
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900">

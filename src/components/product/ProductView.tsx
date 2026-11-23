@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useCart } from '../../context/CartContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { categories } from '../../data/dummyData'
 import { formatRupiah, getStoredProducts, setStoredProducts } from '../../services/storage'
 import type { Product } from '../../types/pos'
@@ -22,6 +23,7 @@ interface ProductViewProps {
 export const ProductView: React.FC<ProductViewProps> = ({ onNavigateTab }) => {
   const { hasPermission } = useAuth()
   const { addItem } = useCart()
+  const { t } = useLanguage()
   const [products, setProducts] = useState<Product[]>(getStoredProducts())
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -158,7 +160,7 @@ export const ProductView: React.FC<ProductViewProps> = ({ onNavigateTab }) => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari produk, kode, atau barcode..."
+            placeholder={t('productSearchPlaceholder')}
             className="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-white border border-slate-200/90 text-xs focus:ring-2 focus:ring-emerald-700 focus:outline-none shadow-sm"
           />
           {searchQuery ? (
@@ -178,7 +180,7 @@ export const ProductView: React.FC<ProductViewProps> = ({ onNavigateTab }) => {
           className="flex items-center gap-1 px-4 py-2.5 rounded-2xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 active:scale-95 transition-all shadow-md shadow-emerald-800/15 shrink-0"
         >
           <Plus className="w-4 h-4" />
-          <span>Tambah</span>
+          <span>{t('add')}</span>
         </button>
       </div>
 
@@ -205,7 +207,7 @@ export const ProductView: React.FC<ProductViewProps> = ({ onNavigateTab }) => {
           }`}
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span>{safeCount} Aman</span>
+          <span>{safeCount} {t('productSafeCount')}</span>
         </button>
 
         <button
@@ -217,7 +219,7 @@ export const ProductView: React.FC<ProductViewProps> = ({ onNavigateTab }) => {
           }`}
         >
           <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-          <span>{lowCount} Menipis</span>
+          <span>{lowCount} {t('productLowCount')}</span>
         </button>
       </div>
 
