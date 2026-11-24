@@ -337,7 +337,7 @@ export const PosView: React.FC = () => {
       {/* Daftar Belanja Header */}
       <div className="flex items-center justify-between pt-1">
         <div className="flex items-center gap-2">
-          <h3 className="font-serif font-bold text-base text-slate-900">{t('posCartTitle')}</h3>
+          <h3 className="font-bold text-base text-slate-900">{t('posCartTitle')}</h3>
           <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-800 text-white">
             {itemCount} {t('posItemsCount')}
           </span>
@@ -553,7 +553,7 @@ export const PosView: React.FC = () => {
         </div>
 
         <div className="pt-2 border-t border-slate-200/80 flex justify-between items-center">
-          <span className="font-serif font-bold text-sm text-slate-900">Total Tagihan</span>
+          <span className="font-bold text-sm text-slate-900">Total Tagihan</span>
           <span className="text-xl font-black text-emerald-900 font-mono">
             {formatRupiah(total)}
           </span>
@@ -696,7 +696,7 @@ export const PosView: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl p-5 space-y-3.5 animate-in zoom-in-95 my-6">
             <div className="flex items-center justify-between">
-              <h3 className="font-serif font-bold text-base text-slate-900">
+              <h3 className="font-bold text-base text-slate-900">
                 Pilih Produk ke Keranjang
               </h3>
               <button
@@ -754,7 +754,7 @@ export const PosView: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
           <div className="bg-white rounded-3xl max-w-sm w-full shadow-2xl p-5 space-y-3.5 animate-in zoom-in-95">
             <div className="flex items-center justify-between">
-              <h3 className="font-serif font-bold text-base text-slate-900">Pilih Pelanggan</h3>
+              <h3 className="font-bold text-base text-slate-900">Pilih Pelanggan</h3>
               <button
                 onClick={() => setShowCustomerPicker(false)}
                 className="p-1 rounded-full text-slate-400 hover:text-slate-600"

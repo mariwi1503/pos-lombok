@@ -44,28 +44,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenNotifications, onOpenHisto
     }
   }
 
-  const roleBadgeStyle = {
-    Owner: 'bg-purple-100 text-purple-700 border-purple-200',
-    Supervisor: 'bg-orange-100 text-orange-700 border-orange-200',
-    Kasir: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-  }[user?.role || 'Kasir']
-
   return (
     <>
       <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 px-4 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
-          {/* Store title & Role badge */}
+          {/* Store title */}
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold font-serif text-slate-900 tracking-tight">
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight">
               {t('appName')}
             </h1>
-            {user && (
-              <span
-                className={`text-xs px-2.5 py-0.5 rounded-full font-semibold border ${roleBadgeStyle}`}
-              >
-                {user.role}
-              </span>
-            )}
           </div>
 
           {/* Action Icons */}

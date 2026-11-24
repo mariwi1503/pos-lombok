@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Nunito', Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Nunito', Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 @layer base {
   :root {
     --font-primary: 'Nunito', Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  *, ::before, ::after {
+    font-family: 'Nunito', Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   body {
@@ -14,9 +23,8 @@
     user-select: none;
   }
 
-  h1, h2, h3, h4, .font-serif {
-    font-family: var(--font-primary);
-    font-weight: 800;
+  h1, h2, h3, h4, h5, h6, .font-serif, .font-sans {
+    font-family: var(--font-primary) !important;
   }
 }
 

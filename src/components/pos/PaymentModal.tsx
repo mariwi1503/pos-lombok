@@ -93,7 +93,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
         {/* Modal Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-serif font-bold text-lg text-slate-900">Pembayaran</h3>
+            <h3 className="font-bold text-lg text-slate-900">Pembayaran</h3>
             <p className="text-xs text-slate-400">Total Tagihan: {formatRupiah(total)}</p>
           </div>
           <button
@@ -107,7 +107,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ onClose, onSuccess }
         {/* Total Display Banner */}
         <div className="bg-emerald-800 text-white rounded-2xl p-4 text-center">
           <p className="text-xs text-emerald-200">Total yang harus dibayar</p>
-          <h2 className="text-2xl font-black font-serif tracking-tight mt-0.5">
+          <h2 className="text-2xl font-black tracking-tight mt-0.5">
             {formatRupiah(total)}
           </h2>
         </div>

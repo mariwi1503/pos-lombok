@@ -94,7 +94,7 @@ export const StaffView: React.FC = () => {
             <IdCard className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="font-serif font-bold text-base text-slate-900">
+            <h2 className="font-bold text-base text-slate-900">
               {staffList.filter((s) => s.active).length} Staff Aktif
             </h2>
             <p className="text-xs text-slate-400">Kelola tim & hak akses role</p>
@@ -220,7 +220,7 @@ export const StaffView: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5 text-emerald-800" />
-            <h3 className="font-serif font-bold text-base text-slate-900">
+            <h3 className="font-bold text-base text-slate-900">
               Matriks Hak Akses Role
             </h3>
           </div>
@@ -283,7 +283,7 @@ export const StaffView: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
           <div className="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-serif font-bold text-lg text-slate-900">Tambah Anggota Staff</h3>
+              <h3 className="font-bold text-lg text-slate-900">Tambah Anggota Staff</h3>
               <button
                 onClick={() => setShowAddModal(false)}
                 className="p-1 rounded-full text-slate-400 hover:text-slate-600"

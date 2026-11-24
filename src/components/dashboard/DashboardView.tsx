@@ -7,8 +7,6 @@ import {
   Lock,
   Receipt,
   ShoppingBag,
-  Truck,
-  Users,
   Wallet,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
@@ -168,7 +166,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
       <div className="bg-white rounded-3xl p-5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-serif font-bold text-base text-slate-900">{t('salesTrend7Days')}</h3>
+            <h3 className="font-bold text-base text-slate-900">{t('salesTrend7Days')}</h3>
             <p className="text-xs text-slate-400">Ketuk batang untuk detail harian</p>
           </div>
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900">
@@ -252,7 +250,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
         <div className="flex items-center justify-between mb-3.5">
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-red-500" />
-            <h3 className="font-serif font-bold text-base text-slate-900">Peringatan Stok Menipis</h3>
+            <h3 className="font-bold text-base text-slate-900">Peringatan Stok Menipis</h3>
           </div>
           <span className="text-xs font-bold text-slate-400">{lowStockProducts.length} Produk</span>
         </div>
@@ -284,7 +282,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
       {/* Kasir Bertugas */}
       <div className="bg-white rounded-3xl p-5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
         <div className="flex items-center justify-between mb-3.5">
-          <h3 className="font-serif font-bold text-base text-slate-900">Kasir Bertugas</h3>
+          <h3 className="font-bold text-base text-slate-900">Kasir Bertugas</h3>
           <span className="text-xs font-semibold text-emerald-700 flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
             {activeCashiers.length} Aktif
@@ -314,25 +312,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigateTab }) =
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Quick Action Shortcuts: Master Pelanggan & Master Supplier */}
-      <div className="grid grid-cols-2 gap-3 pt-1">
-        <button
-          onClick={() => onNavigateTab('mitra', 'pelanggan')}
-          className="flex items-center justify-center gap-2 p-3.5 rounded-full bg-white border border-slate-200/90 text-slate-700 font-bold text-xs shadow-sm hover:bg-slate-50 active:scale-95 transition-all"
-        >
-          <Users className="w-4 h-4 text-emerald-700" />
-          <span>Master Pelanggan...</span>
-        </button>
-
-        <button
-          onClick={() => onNavigateTab('mitra', 'supplier')}
-          className="flex items-center justify-center gap-2 p-3.5 rounded-full bg-white border border-slate-200/90 text-slate-700 font-bold text-xs shadow-sm hover:bg-slate-50 active:scale-95 transition-all"
-        >
-          <Truck className="w-4 h-4 text-emerald-700" />
-          <span>Master Supplier (...)</span>
-        </button>
       </div>
     </div>
   )

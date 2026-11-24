@@ -188,7 +188,7 @@ export const TransactionHistoryView: React.FC<TransactionHistoryViewProps> = ({ 
 
       <div className="bg-white rounded-3xl p-5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] space-y-4">
         <div>
-          <h2 className="font-serif font-bold text-lg text-slate-900">
+          <h2 className="font-bold text-lg text-slate-900">
             Riwayat Transaksi Penjualan
           </h2>
           <p className="text-xs text-slate-400">
@@ -430,7 +430,7 @@ export const TransactionHistoryView: React.FC<TransactionHistoryViewProps> = ({ 
           <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 space-y-4 animate-in zoom-in-95 my-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif font-bold text-lg text-slate-900">
+                <h3 className="font-bold text-lg text-slate-900">
                   Rincian Transaksi
                 </h3>
                 <p className="font-mono text-xs text-slate-400">{selectedTx.orderNumber}</p>

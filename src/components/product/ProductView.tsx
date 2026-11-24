@@ -387,7 +387,7 @@ export const ProductView: React.FC<ProductViewProps> = ({ onNavigateTab }) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl animate-in zoom-in-95 my-8">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-serif font-bold text-lg text-slate-900">
+              <h3 className="font-bold text-lg text-slate-900">
                 {isAddMode ? 'Tambah Produk Baru' : 'Edit Detail Produk'}
               </h3>
               <button

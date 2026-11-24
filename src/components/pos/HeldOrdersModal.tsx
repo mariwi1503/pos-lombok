@@ -22,7 +22,7 @@ export const HeldOrdersModal: React.FC<HeldOrdersModalProps> = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-emerald-800" />
-            <h3 className="font-serif font-bold text-lg text-slate-900">
+            <h3 className="font-bold text-lg text-slate-900">
               Antrean Transaksi Tertunda
             </h3>
           </div>

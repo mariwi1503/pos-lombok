@@ -73,7 +73,7 @@ export const LoginPage: React.FC = () => {
           <div className="w-14 h-14 bg-white/10 rounded-2xl mx-auto flex items-center justify-center mb-2.5 backdrop-blur-sm border border-white/20 shadow-inner">
             <Store className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold font-serif tracking-tight">{t('appName')}</h1>
+          <h1 className="text-2xl font-bold tracking-tight">{t('appName')}</h1>
           <p className="text-emerald-100/90 text-xs mt-0.5">{t('appSubtitle')}</p>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-[11px] font-medium text-emerald-100 mt-2.5 backdrop-blur-sm">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />

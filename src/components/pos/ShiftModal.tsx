@@ -48,7 +48,7 @@ export const ShiftModal: React.FC<ShiftModalProps> = ({ onClose }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-emerald-800" />
-            <h3 className="font-serif font-bold text-base text-slate-900">
+            <h3 className="font-bold text-base text-slate-900">
               {closedSummary ? 'Rekap Tutup Kasir Selesai' : 'Laporan Shift & Kasir'}
             </h3>
           </div>
@@ -66,7 +66,7 @@ export const ShiftModal: React.FC<ShiftModalProps> = ({ onClose }) => {
             </div>
 
             <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 font-mono text-xs space-y-1.5 text-slate-700">
-              <div className="text-center font-bold font-serif pb-1.5 border-b border-dashed border-slate-300 text-slate-900">
+              <div className="text-center font-bold pb-1.5 border-b border-dashed border-slate-300 text-slate-900">
                 REKAP TUTUP KASIR
               </div>
               <div className="flex justify-between text-[11px] pt-1">

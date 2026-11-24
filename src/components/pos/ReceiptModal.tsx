@@ -58,7 +58,7 @@ Terima kasih telah berbelanja!
           <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2">
             <CheckCircle2 className="w-7 h-7" />
           </div>
-          <h3 className="font-serif font-bold text-lg text-slate-900">{t('paySuccessTitle')}</h3>
+          <h3 className="font-bold text-lg text-slate-900">{t('paySuccessTitle')}</h3>
           <p className="text-xs text-slate-400">Transaksi telah dicatat dan stok diperbarui.</p>
         </div>
 
@@ -66,7 +66,7 @@ Terima kasih telah berbelanja!
         <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 font-mono text-xs text-slate-700 shadow-inner space-y-2">
           {/* Store Logo & Header */}
           <div className="text-center pb-2 border-b border-dashed border-slate-300">
-            <h4 className="font-bold text-sm tracking-wider font-serif text-slate-900 uppercase">
+            <h4 className="font-bold text-sm tracking-wider text-slate-900 uppercase">
               {t('appName')}
             </h4>
             <p className="text-[10px] text-slate-500">Jl. Berkah Makmur No. 88, Jakarta</p>

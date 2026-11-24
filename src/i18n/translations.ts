@@ -322,7 +322,7 @@ export const translations = {
     // Mitra / Customer & Supplier
     mitraSubCustomer: 'Pelanggan',
     mitraSubSupplier: 'Pembekal',
-    mitraSubPurchase: 'Belian Stok / PO',
+    mitraSubPurchase: 'Kulakan / PO',
     mitraCustomerTitle: 'Senarai Pelanggan Kedai',
     mitraSupplierTitle: 'Senarai Pembekal / Pengedar',
     mitraPurchaseTitle: 'Rekod Belian Stok & PO',

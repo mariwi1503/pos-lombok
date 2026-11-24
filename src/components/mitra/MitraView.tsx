@@ -194,54 +194,54 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
         </div>
       )}
 
-      {/* Subtab Switcher (Full Width on Smartphone, No Overlap) */}
-      <div className="flex bg-slate-200/80 p-1 rounded-2xl text-xs font-bold gap-1 shadow-inner">
+      {/* Subtab Switcher (Full Width on Smartphone, Balanced 3-Column Grid) */}
+      <div className="grid grid-cols-3 bg-slate-200/80 p-1 rounded-2xl text-xs font-bold gap-1 shadow-inner w-full">
         <button
           onClick={() => setActiveSubTab('pelanggan')}
-          className={`flex-1 py-2 px-1.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold ${
+          className={`py-2 px-1 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold min-w-0 ${
             activeSubTab === 'pelanggan'
               ? 'bg-white text-emerald-900 shadow-sm'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Users className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">{t('mitraSubCustomer')} ({customers.length})</span>
+          <span className="truncate">{t('mitraSubCustomer')}</span>
         </button>
 
         <button
           onClick={() => setActiveSubTab('supplier')}
-          className={`flex-1 py-2 px-1.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold ${
+          className={`py-2 px-1 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold min-w-0 ${
             activeSubTab === 'supplier'
               ? 'bg-white text-emerald-900 shadow-sm'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Truck className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">{t('mitraSubSupplier')} ({suppliers.length})</span>
+          <span className="truncate">{t('mitraSubSupplier')}</span>
         </button>
 
         <button
           onClick={() => setActiveSubTab('pembelian')}
-          className={`flex-1 py-2 px-1.5 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold ${
+          className={`py-2 px-1 rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs font-bold min-w-0 ${
             activeSubTab === 'pembelian'
               ? 'bg-white text-emerald-900 shadow-sm'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Package className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">{t('mitraSubPurchase')} ({purchases.length})</span>
+          <span className="truncate">{t('mitraSubPurchase')}</span>
         </button>
       </div>
 
       {/* Subtab Header & Action Button */}
-      <div className="flex items-center justify-between pt-0.5">
-        <div>
-          <h3 className="font-serif font-bold text-base text-slate-900">
+      <div className="flex items-center justify-between gap-2 pt-0.5">
+        <div className="min-w-0 flex-1">
+          <h3 className="font-bold text-base text-slate-900 truncate">
             {activeSubTab === 'pelanggan' && t('mitraCustomerTitle')}
             {activeSubTab === 'supplier' && t('mitraSupplierTitle')}
             {activeSubTab === 'pembelian' && t('mitraPurchaseTitle')}
           </h3>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-slate-400 truncate">
             {activeSubTab === 'pelanggan' && `${customers.length} kontak pelanggan terdaftar`}
             {activeSubTab === 'supplier' && `${suppliers.length} rekanan supplier aktif`}
             {activeSubTab === 'pembelian' && `${purchases.length} faktur kulakan supplier`}
@@ -382,19 +382,19 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs">
-                  <div>
-                    <h5 className="font-bold text-slate-800">{po.supplierName}</h5>
-                    <p className="text-[11px] text-slate-400 mt-0.5">
+                <div className="flex items-center justify-between text-xs gap-2">
+                  <div className="min-w-0 flex-1">
+                    <h5 className="font-bold text-slate-800 truncate">{po.supplierName}</h5>
+                    <p className="text-[11px] text-slate-400 mt-0.5 truncate">
                       {po.items.length} jenis produk • {totalQty} pcs masuk
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right shrink-0">
                     <span className="font-mono font-bold text-xs text-slate-900 block">
                       {formatRupiah(po.totalAmount)}
                     </span>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.2 rounded-full inline-block mt-0.5 ${
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mt-0.5 ${
                         po.paymentStatus === 'Lunas'
                           ? 'bg-emerald-100 text-emerald-800'
                           : 'bg-amber-100 text-amber-800'
@@ -416,7 +416,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
           <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 space-y-3.5 animate-in zoom-in-95 my-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif font-bold text-base text-slate-900">
+                <h3 className="font-bold text-base text-slate-900">
                   Faktur Pembelian Supplier
                 </h3>
                 <p className="font-mono text-xs text-slate-400">{selectedPurchase.purchaseNumber}</p>
@@ -497,7 +497,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
           <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 space-y-3.5 animate-in zoom-in-95 my-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif font-bold text-base text-slate-900">
+                <h3 className="font-bold text-base text-slate-900">
                   Catat Pembelian ke Supplier (Restok)
                 </h3>
                 <p className="text-xs text-slate-400">Stok produk otomatis bertambah di toko.</p>
@@ -669,7 +669,7 @@ export const MitraView: React.FC<MitraViewProps> = ({ initialSubTab = 'pelanggan
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
           <div className="bg-white rounded-3xl max-w-sm w-full shadow-2xl p-6 space-y-4 animate-in zoom-in-95">
             <div className="flex items-center justify-between">
-              <h3 className="font-serif font-bold text-lg text-slate-900">
+              <h3 className="font-bold text-lg text-slate-900">
                 {activeSubTab === 'pelanggan' ? 'Tambah Pelanggan Baru' : 'Tambah Supplier Baru'}
               </h3>
               <button
